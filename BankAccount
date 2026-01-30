@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+
+class AccountManager;
+
+class BankAccount
+{
+private:
+    double balance;
+
+public:
+    BankAccount(double b)
+    {
+        balance = b;
+    }
+
+    friend class AccountManager;
+};
+
+class AccountManager
+{
+public:
+    void show(BankAccount a)
+    {
+        cout << "Balance: " << a.balance << endl;
+    }
+
+    void add(BankAccount &a, double m)
+    {
+        a.balance = a.balance + m;
+    }
+
+    void deduct(BankAccount &a, double m)
+    {
+        if (m <= a.balance)
+            a.balance =a.balance- m;
+        else
+            cout << "Low balance\n";
+    }
+};
+
+int main()
+{
+    BankAccount acc(5000);
+    AccountManager m;
+
+    m.show(acc);
+    m.add(acc, 1000);
+    m.show(acc);
+    m.deduct(acc, 2000);
+    m.show(acc);
+
+    return 0;
+}
