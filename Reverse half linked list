@@ -1,0 +1,54 @@
+
+
+class linkedlist{
+	private:
+		Node* head;
+	public:
+		linkedlist(){
+			head=NULL;
+		}
+		void display(){
+			Node* temp=head;
+			while (temp!=NULL) {
+				cout<<temp->data<<"->";
+				temp=temp->next;
+			}
+			cout<<"END\n";
+		}
+		void insert(int value) {
+			Node* newNode=new Node();
+			newNode->data=value;
+			newNode->next=head;
+			head=newNode;
+		}
+		void reverseHalf(){
+			if(head==NULL) return;
+			Node* slow=head;
+			Node* fast=head;
+			while(fast->next!=NULL && fast->next->next!=NULL){
+				slow=slow->next;
+				fast=fast->next->next;
+			}
+			Node* prev=NULL;
+			Node* current=slow->next;
+			Node* next=NULL;
+			while(current!=NULL){
+				next=current->next;
+				current->next=prev;
+				prev=current;
+				current=next;
+			}
+			slow->next=prev;
+		}
+};
+int main(){
+	linkedlist L1;
+	L1.insert(6);
+	L1.insert(15);
+	L1.insert(64);
+	L1.insert(20);
+	L1.display();
+	L1.reverseHalf();
+	L1.display();
+	return 0;
+}
