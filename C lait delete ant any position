@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* head = NULL;
+
+void deletePos(int pos) {
+    if (head == NULL) {
+        cout << "List empty";
+        return;
+    }
+
+    if (pos == 1) {
+        if (head->next == head) {
+            delete head;
